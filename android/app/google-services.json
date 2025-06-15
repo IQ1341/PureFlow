@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "705872660464",
+    "project_id": "pureflow-fba61",
+    "storage_bucket": "pureflow-fba61.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705872660464:android:6a15355ccec46820dfbf35",
+        "android_client_info": {
+          "package_name": "com.example.pureflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCni7EskrvO9b5Qpv1iPqXw9YcOx8hBTRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
