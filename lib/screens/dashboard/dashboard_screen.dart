@@ -15,8 +15,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool showSuhu = true;
 
   final _database = FirebaseDatabase.instance.ref();
-  int suhu = 0;
-  int kekeruhan = 0;
+  double suhu = 0.0;
+  double kekeruhan = 0.0;
   double currentPercent = 0.0;
 
   @override
@@ -29,10 +29,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _database.child("sensor/suhu").onValue.listen((event) {
       final value = event.snapshot.value;
       if (value != null) {
-        final newVal = int.tryParse(value.toString()) ?? 0;
+        final newVal = double.tryParse(value.toString()) ?? 0.0;
         setState(() {
           suhu = newVal;
-          if (showSuhu) currentPercent = (newVal.clamp(0, 100)) / 100;
+          if (showSuhu) currentPercent = (newVal.clamp(0.0, 100.0)) / 100.0;
         });
       }
     });
@@ -40,10 +40,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _database.child("sensor/kekeruhan").onValue.listen((event) {
       final value = event.snapshot.value;
       if (value != null) {
-        final newVal = int.tryParse(value.toString()) ?? 0;
+        final newVal = double.tryParse(value.toString()) ?? 0.0;
         setState(() {
           kekeruhan = newVal;
-          if (!showSuhu) currentPercent = (newVal.clamp(0, 100)) / 100;
+          if (!showSuhu) currentPercent = (newVal.clamp(0.0, 100.0)) / 100.0;
         });
       }
     });
@@ -52,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final value = showSuhu ? suhu : kekeruhan;
-    final satuan = showSuhu ? "°C" : "NTU";
+    final satuan = showSuhu ? "°C" : " NTU";
 
     return Scaffold(
       body: Column(
@@ -81,14 +81,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       toggleButton("Suhu", showSuhu, () {
                         setState(() {
                           showSuhu = true;
-                          currentPercent = (suhu.clamp(0, 100)) / 100;
+                          currentPercent = (suhu.clamp(0.0, 100.0)) / 100.0;
                         });
                       }),
                       const SizedBox(width: 16),
                       toggleButton("Kekeruhan", !showSuhu, () {
                         setState(() {
                           showSuhu = false;
-                          currentPercent = (kekeruhan.clamp(0, 100)) / 100;
+                          currentPercent = (kekeruhan.clamp(0.0, 100.0)) / 100.0;
                         });
                       }),
                     ],
@@ -150,7 +150,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "$value$satuan",
+                          "${value.toStringAsFixed(1)}$satuan",
                           style: GoogleFonts.poppins(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -182,7 +182,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget statusInfo(int value) {
+  Widget statusInfo(double value) {
     String status;
     Color color;
     IconData icon;
