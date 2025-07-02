@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../screens/settings/settings_screen.dart';
+import '../../screens/history/history_screen.dart'; // Import halaman history sesuai struktur project-mu
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -57,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       body: Column(
         children: [
-          // Header with Settings Icon
+          // Header with Settings and History Icon
           Stack(
             children: [
               Container(
@@ -95,6 +96,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
               ),
+              // History Icon di kiri atas
+              Positioned(
+                top: 40,
+                left: 16,
+                child: IconButton(
+                  icon: const Icon(Icons.history, color: Colors.white, size: 28),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistoryScreen()),
+                    );
+                  },
+                ),
+              ),
+              // Settings Icon di kanan atas
               Positioned(
                 top: 40,
                 right: 16,
